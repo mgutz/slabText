@@ -16,7 +16,8 @@
             "headerBreakpoint"      : null,
             "viewportBreakpoint"    : null,
             // Don't attach a resize event
-            "noResizeEvent"         : false
+            "noResizeEvent"         : false,
+            "maxFontSize"           : 120
             };
         
         // Add the slabtexted classname to the body to initiate the styling of
@@ -40,7 +41,8 @@
                 headerBreakpoint    = settings.headerBreakpoint,
                 viewportBreakpoint  = settings.viewportBreakpoint,
                 resizeThrottle      = null,
-                viewportWidth       = $(window).width();                                   
+                viewportWidth       = $(window).width(),
+                maxFontSize         = settings.maxFontSize;                                 
             
             // Calculates the pixel equivalent of 1em within the current header
             var grabPixelFontSize = function() {
@@ -142,15 +144,20 @@
                         wordSpacing = innerText.split(" ").length > 1,
                         diff,
                         ratio,
-                        fontSize;
+                        fontSize,
+                        newFontSize;
                         
                     $span.css('word-spacing', 0).css('letter-spacing', 0);
                     
                     ratio    = parentWidth / $span.width();
                     fontSize = parseFloat(this.style.fontSize) || origFontSize;
+                    newFontSize = (fontSize * ratio).toFixed(3);
+                    if (newFontSize > maxFontSize) { newFontSize = maxFontSize};
                     
                     // Resize font    
-                    $span.css('font-size', (fontSize * ratio).toFixed(3) + "px");
+                    $span.css('font-size', newFontSize + "px");
+                    // Resize line-height
+                    $span.css('line-height', (6 + new Number(newFontSize)) + "px");
                     
                     // Do we still have space to try to fill or crop
                     diff = parentWidth - $span.width();
