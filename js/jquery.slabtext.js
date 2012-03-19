@@ -160,14 +160,14 @@
                     $span.css('line-height', (6 + new Number(newFontSize)) + "px");
                     
                     // Do we still have space to try to fill or crop
-                    diff = parentWidth - $span.width();
+                    // diff = parentWidth - $span.width();
                     
                     // A "dumb" tweak in the blind hope that the browser will
                     // resize the text to better fit the available space.
                     // Better "dumb" and fast...
-                    if(diff) {
-                        $span.css((wordSpacing ? 'word' : 'letter') + '-spacing', (diff / (wordSpacing ? innerText.split(" ").length - 1 : innerText.length)).toFixed(3) + "px");
-                    };                                                                                                                        
+                    // if(diff) {
+                    //     $span.css((wordSpacing ? 'word' : 'letter') + '-spacing', (diff / (wordSpacing ? innerText.split(" ").length - 1 : innerText.length)).toFixed(3) + "px");
+                    // };                                                                                                                        
                 });
                     
                 // Add the class slabtextdone to set a display:block on the child spans
